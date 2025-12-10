@@ -1,106 +1,141 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AP Systems Lab — WordPress Tools</title>
-  <meta name="description" content="Lightweight WordPress tools for business workflows. First product: AP Internal Linking Helper." />
+  <title>AP Systems Lab — AP Internal Linking Helper</title>
 
   <style>
     :root{
-      --bg:#0b0f14;
-      --panel:#0f1620;
-      --panel-2:#0c121a;
-      --text:#f5f7fb;
-      --muted:#b8c2d1;
-      --accent:#7aa2ff;
-      --accent-2:#8bffcf;
-      --border:rgba(255,255,255,0.08);
-      --shadow:0 10px 30px rgba(0,0,0,0.35);
-      --radius:16px;
-      --radius-sm:10px;
-      --max:1080px;
+      --bg: #0b1020;
+      --panel: rgba(255,255,255,0.04);
+      --panel-2: rgba(255,255,255,0.02);
+      --border: rgba(255,255,255,0.08);
+      --text: #f4f7ff;
+      --muted: rgba(244,247,255,0.68);
+      --radius: 16px;
+      --radius-sm: 12px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.25);
     }
+
     *{box-sizing:border-box}
     body{
       margin:0;
+      background: radial-gradient(1200px 700px at 10% -10%, rgba(122,162,255,0.12), transparent 60%),
+                  radial-gradient(900px 600px at 90% 10%, rgba(139,255,207,0.10), transparent 55%),
+                  var(--bg);
+      color: var(--text);
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 10% -10%, rgba(122,162,255,0.12), transparent 60%),
-        radial-gradient(1200px 600px at 90% 10%, rgba(139,255,207,0.10), transparent 60%),
-        var(--bg);
-      line-height:1.5;
+      line-height: 1.45;
     }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:32px 20px 80px}
+
+    .wrap{
+      width:min(1100px, 92vw);
+      margin: 28px auto 40px;
+    }
 
     .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 18px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      padding: 14px 16px;
       border:1px solid var(--border);
       border-radius: var(--radius);
-      backdrop-filter: blur(6px);
+      background: var(--panel);
+      backdrop-filter: blur(8px);
     }
-    .brand{display:flex; align-items:center; gap:10px; font-weight:700}
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:700;
+      letter-spacing: 0.2px;
+    }
     .brand-badge{
-      width:28px; height:28px; border-radius:9px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      display:grid; place-items:center;
-      color:#041018; font-weight:900; font-size:14px;
+      width:28px; height:28px;
+      display:inline-flex; align-items:center; justify-content:center;
+      border-radius: 9px;
+      background: linear-gradient(135deg, rgba(122,162,255,0.25), rgba(139,255,207,0.22));
+      border:1px solid rgba(255,255,255,0.12);
+      font-size: 12px;
     }
-    .nav-links{display:flex; gap:14px; font-size:14px; color:var(--muted)}
-    .nav-links a:hover{color:var(--text)}
+    .nav-links{
+      display:flex; gap: 12px; flex-wrap:wrap;
+    }
+    .nav a{
+      color: var(--muted);
+      text-decoration:none;
+      font-size: 12.8px;
+      font-weight: 600;
+      padding: 6px 8px;
+      border-radius: 8px;
+    }
+    .nav a:hover{color: var(--text); background: rgba(255,255,255,0.05)}
 
     .hero{
-      margin-top:28px;
-      display:grid; gap:26px;
+      margin-top: 18px;
+      display:grid;
+      gap: 18px;
       grid-template-columns: 1.1fr 0.9fr;
+      align-items: start;
     }
-    @media (max-width: 900px){ .hero{grid-template-columns:1fr} }
+    @media (max-width: 900px){
+      .hero{grid-template-columns: 1fr}
+    }
 
     .card{
       background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent), var(--panel);
       border:1px solid var(--border);
       border-radius: var(--radius);
-      padding: 26px;
+      padding: 28px;
       box-shadow: var(--shadow);
     }
+
     .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:6px 10px; font-size:12px; color:var(--muted);
-      background: rgba(255,255,255,0.04);
-      border:1px solid var(--border);
+      display:inline-flex;
+      padding: 6px 10px;
       border-radius: 999px;
-    }
-    h1{
-      font-size: clamp(28px, 4vw, 44px);
-      line-height:1.1;
-      margin:14px 0 10px;
-      letter-spacing:-0.5px;
-    }
-    .sub{
-      color:var(--muted);
-      font-size: clamp(15px, 1.2vw, 17px);
-      margin: 0 0 18px;
-    }
-    .points{display:grid; gap:10px; margin:18px 0 22px}
-    .point{
-      display:flex; gap:10px; align-items:flex-start;
-      padding:10px 12px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--muted);
+      border:1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.03);
-      border:1px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-size:14px;
-    }
-    .dot{
-      width:9px; height:9px; border-radius:50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      margin-top:7px; flex: 0 0 9px;
+      letter-spacing: 0.25px;
     }
 
-    .btns{display:flex; gap:10px; flex-wrap:wrap}
+    h1{
+      margin: 10px 0 10px;
+      font-size: clamp(28px, 3.5vw, 38px);
+      line-height: 1.12;
+    }
+
+    .sub{
+      color: var(--muted);
+      font-size: 15px;
+      margin: 0 0 16px;
+    }
+
+    .points{
+      display:grid; gap:10px;
+      margin-top: 14px;
+    }
+    .point{
+      display:flex; gap:10px; align-items:flex-start;
+      padding: 10px 10px;
+      border:1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.02);
+    }
+    .dot{
+      width:10px; height:10px; margin-top: 6px;
+      border-radius:50%;
+      background: linear-gradient(135deg, rgba(122,162,255,0.9), rgba(139,255,207,0.9));
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.03);
+      flex: 0 0 auto;
+    }
+    .point strong{color: var(--text)}
+
+    .btns{display:flex; gap: 10px; flex-wrap:wrap; margin-top: 14px}
+
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       padding: 12px 16px;
@@ -109,6 +144,7 @@
       border:1px solid var(--border);
       background: rgba(255,255,255,0.03);
       color: var(--text);
+      text-decoration:none;
     }
     .btn-primary{
       background: linear-gradient(135deg, rgba(122,162,255,0.18), rgba(139,255,207,0.14));
@@ -131,6 +167,7 @@
       padding: 14px;
       color: var(--muted);
       font-size: 13px;
+      background: rgba(255,255,255,0.02);
     }
 
     .section{
@@ -262,21 +299,47 @@
       </div>
 
       <div class="preview">
-  <strong>Product visuals</strong>
+        <strong>Product visuals</strong>
 
-  <div class="preview-box">
-    <img src="assets/img/Pro1 (1).png" alt="AP Link Helper Pro sidebar" style="width:100%; border-radius:10px;">
-  </div>
+        <div class="preview-box">
+          <img src="assets/img/Pro1 (1).png" alt="AP Link Helper Pro sidebar" style="width:100%; border-radius:10px;">
+        </div>
 
-  <div class="preview-box">
-    <img src="assets/img/Pro1 (2).png" alt="AP Link Helper Pro suggestions" style="width:100%; border-radius:10px;">
-  </div>
+        <div class="preview-box">
+          <img src="assets/img/Pro1 (2).png" alt="AP Link Helper Pro suggestions" style="width:100%; border-radius:10px;">
+        </div>
 
-  <div class="preview-box">
-    <img src="assets/img/Pro1 (3).png" alt="AP Link Helper Pro plugin screen" style="width:100%; border-radius:10px;">
-  </div>
-</div>
+        <div class="preview-box">
+          <img src="assets/img/Pro1 (3).png" alt="AP Link Helper Pro plugin screen" style="width:100%; border-radius:10px;">
+        </div>
+      </div>
+    </div>
 
+    <!-- NEW: Brand statement with your 3 paragraphs -->
+    <div class="section" id="about">
+      <h2>About AP Systems Lab</h2>
+
+      <p>
+        We want AP Systems Lab to stand for good judgement and careful craft. That means choosing problems worth solving,
+        resisting feature sprawl, and building tools that we’re proud to put our name on for the long term. We’re not interested
+        in a crowded catalog for its own sake. We’re here to build a small, trustworthy collection of plugins that reflect our
+        standards — work that feels intentional, consistent, and built to last.
+      </p>
+
+      <p>
+        That belief shapes our approach. We start by researching real workflows and looking for problems that are specific,
+        repeatable, and worth solving. We design for minimal setup, clean UI, and predictable behavior, aiming for lightweight
+        plugins that integrate naturally into WordPress instead of fighting it. We build generous free versions that stand on their
+        own, and we treat Pro as a thoughtful, clearly superior extension—not a paywall for basics. Every release is guided by a
+        simple standard: if it doesn’t reduce confusion, eliminate busywork, or meaningfully improve control or security, it doesn’t ship.
+      </p>
+
+      <p>
+        We create WordPress plugins that help people work with more clarity, confidence, and consistency. Our releases follow a
+        simple principle: a strong foundation, with Pro features that add clear depth for those who need more. We’ll continue to
+        expand the product line as we find problems that deserve a better solution.
+      </p>
+    </div>
 
     <div id="pro" class="section">
       <h2>AP Link Helper Pro</h2>
@@ -419,5 +482,3 @@
   </script>
 </body>
 </html>
-
-
