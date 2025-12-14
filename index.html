@@ -132,7 +132,6 @@
       box-shadow: 0 0 0 3px rgba(255,255,255,0.03);
       flex: 0 0 auto;
     }
-    .point strong{color: var(--text)}
 
     .btns{display:flex; gap: 10px; flex-wrap:wrap; margin-top: 14px}
 
@@ -289,7 +288,6 @@
         </div>
 
         <div class="btns">
-          <!-- Replace with your Stripe Payment Link when Pro is live -->
           <a class="btn btn-primary" href="#" data-buy-pro="1" target="_blank" rel="noopener">Buy Pro (Stripe)</a>
           <a class="btn btn-ghost" href="#compare">See Pro features</a>
         </div>
@@ -315,7 +313,7 @@
       </div>
     </div>
 
-        <!-- Brand statement with your 3 paragraphs -->
+    <!-- Brand / WHY-HOW-WHAT block -->
     <div class="section" id="about">
       <h2>About AP Systems Lab</h2>
 
@@ -341,26 +339,27 @@
       </p>
     </div>
 
-    <!-- Pro section with AI features -->
+    <!-- AP Link Helper Pro section with AI -->
     <div id="pro" class="section">
       <h2>AP Link Helper Pro</h2>
       <p>
-        Smarter internal linking suggestions and faster workflows inside the WordPress block editor.
-        Pro adds optional AI assistance to sharpen link ideas and anchor text while you write.
+        AP Link Helper Pro builds on the free plugin with faster workflows, more control over suggestions, and optional AI help
+        when you want extra ideas. It’s for people who publish regularly and want internal linking to feel like part of the writing
+        flow, not a separate chore.
       </p>
 
       <div class="grid-3">
         <div class="feat">
           <h3>AI-assisted suggestions</h3>
-          <p>Use AI to refine link ideas and anchor text based on the paragraph you're working on.</p>
+          <p>Highlight a paragraph and use AI to refine link ideas and anchor text based on what you’re writing.</p>
         </div>
         <div class="feat">
           <h3>Expanded suggestions</h3>
-          <p>More internal link options surfaced from across your existing content.</p>
+          <p>Surface more relevant internal link options per post so older, useful content doesn’t stay buried.</p>
         </div>
         <div class="feat">
-          <h3>Rules & exclusions</h3>
-          <p>Control what appears with simple keyword matching, filters, and ignore rules.</p>
+          <h3>Rules &amp; exclusions</h3>
+          <p>Set simple rules for what to ignore or prioritise so suggestions stay focused instead of noisy.</p>
         </div>
       </div>
 
@@ -375,7 +374,6 @@
     </div>
 
     <div id="product" class="section">
-
       <h2>What this plugin is for</h2>
       <p>A small tool built for writers and business owners who want better internal linking without the time sink.</p>
       <div class="grid-3">
@@ -413,7 +411,8 @@
             <li><strong>One-click insert into selected text</strong></li>
             <li>25+ suggestions per post</li>
             <li>Keyword/phrase matching</li>
-            <li>Exclusions & rules</li>
+            <li>Rules and exclusions for suggestions</li>
+            <li>Optional AI anchor ideas drawn from your content</li>
             <li>Priority support</li>
           </ul>
         </div>
@@ -433,7 +432,6 @@
             <li>Priority support</li>
           </ul>
           <div class="btns" style="margin-top:14px;">
-            <!-- Replace with your Stripe Payment Link -->
             <a class="btn btn-primary" href="#" data-buy-pro="1" target="_blank" rel="noopener">Buy Pro (Stripe)</a>
             <a class="btn btn-ghost" href="#faq">Questions?</a>
           </div>
@@ -480,13 +478,12 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // When Pro is live, paste your Stripe Payment Link below
-const STRIPE_LINK = "https://buy.stripe.com/bJe28taicfN13ab4zxdjO0l";
+    // Stripe payment link for all "Buy Pro" buttons
+    const STRIPE_LINK = "https://buy.stripe.com/bJe28taicfN13ab4zxdjO0l";
 
-document.querySelectorAll('a[data-buy-pro="1"]').forEach(a => {
-  a.href = STRIPE_LINK;
-});
-
+    document.querySelectorAll('a[data-buy-pro="1"]').forEach(a => {
+      a.href = STRIPE_LINK;
+    });
   </script>
 </body>
 </html>
