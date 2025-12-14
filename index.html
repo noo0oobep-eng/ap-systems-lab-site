@@ -478,8 +478,12 @@
     document.getElementById("year").textContent = new Date().getFullYear();
 
     // When Pro is live, paste your Stripe Payment Link below
-    // const STRIPE_LINK = "https://buy.stripe.com/...";
-    // document.querySelectorAll('a[href="#"]').forEach(a => a.href = STRIPE_LINK);
+const STRIPE_LINK = "https://buy.stripe.com/bJe28taicfN13ab4zxdjO0l";
+
+document.querySelectorAll('a[data-buy-pro="1"]').forEach(a => {
+  a.href = STRIPE_LINK;
+});
+
   </script>
 </body>
 </html>
