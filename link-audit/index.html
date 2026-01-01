@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AP Link Audit — Internal Linking Audit for WordPress</title>
+
+  <style>
+    :root{
+      --bg: #0b1020;
+      --panel: rgba(255,255,255,0.04);
+      --panel-2: rgba(255,255,255,0.02);
+      --border: rgba(255,255,255,0.08);
+      --text: #f4f7ff;
+      --muted: rgba(244,247,255,0.68);
+      --radius: 16px;
+      --radius-sm: 12px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:
+        radial-gradient(1200px 700px at 10% -10%, rgba(122,162,255,0.12), transparent 60%),
+        radial-gradient(900px 600px at 90% 10%, rgba(139,255,207,0.10), transparent 55%),
+        var(--bg);
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      line-height:1.45;
+    }
+    .wrap{width:min(1100px,92vw);margin:28px auto 40px;}
+
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:14px;padding:14px 16px;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:var(--panel);
+      backdrop-filter:blur(8px);
+    }
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:0.2px;}
+    .brand-badge{
+      width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;
+      border-radius:9px;
+      background:linear-gradient(135deg,rgba(122,162,255,0.25),rgba(139,255,207,0.22));
+      border:1px solid rgba(255,255,255,0.12);
+      font-size:12px;
+    }
+    .nav-links{display:flex;gap:12px;flex-wrap:wrap;}
+    .nav a{
+      color:var(--muted);
+      text-decoration:none;
+      font-size:12.8px;
+      font-weight:600;
+      padding:6px 8px;
+      border-radius:8px;
+    }
+    .nav a:hover{color:var(--text);background:rgba(255,255,255,0.05)}
+
+    .hero{
+      margin-top:18px;
+      display:grid;gap:18px;
+      grid-template-columns:1.1fr 0.9fr;
+      align-items:start;
+    }
+    @media (max-width:900px){.hero{grid-template-columns:1fr}}
+
+    .card{
+      background:linear-gradient(180deg,rgba(255,255,255,0.03),transparent),var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow:var(--shadow);
+    }
+    .pill{
+      display:inline-flex;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:11.5px;
+      font-weight:700;
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,0.10);
+      background:rgba(255,255,255,0.03);
+      letter-spacing:0.25px;
+    }
+    h1{
+      margin:10px 0 10px;
+      font-size:clamp(28px,3.5vw,38px);
+      line-height:1.12;
+    }
+    .sub{color:var(--muted);font-size:15px;margin:0 0 16px;}
+
+    .points{display:grid;gap:10px;margin-top:14px;}
+    .point{
+      display:flex;gap:10px;align-items:flex-start;
+      padding:10px 10px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:rgba(255,255,255,0.02);
+    }
+    .dot{
+      width:10px;height:10px;margin-top:6px;
+      border-radius:50%;
+      background:linear-gradient(135deg,rgba(122,162,255,0.9),rgba(139,255,207,0.9));
+      box-shadow:0 0 0 3px rgba(255,255,255,0.03);
+      flex:0 0 auto;
+    }
+
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:12px 16px;
+      border-radius:12px;
+      font-weight:600;font-size:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.03);
+      color:var(--text);
+      text-decoration:none;
+    }
+    .btn-primary{
+      background:linear-gradient(135deg,rgba(122,162,255,0.18),rgba(139,255,207,0.14));
+      border-color:rgba(255,255,255,0.14);
+    }
+    .btn-ghost{color:var(--muted)}
+
+    .preview{
+      background:linear-gradient(180deg,rgba(255,255,255,0.03),transparent),var(--panel-2);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:var(--shadow);
+      min-height:280px;
+      display:grid;gap:14px;align-content:start;
+    }
+    .preview-box{
+      border:1px dashed rgba(255,255,255,0.18);
+      border-radius:12px;
+      padding:14px;
+      color:var(--muted);
+      font-size:13px;
+      background:rgba(255,255,255,0.02);
+    }
+
+    .section{
+      margin-top:46px;
+      background:rgba(255,255,255,0.02);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:28px;
+    }
+    .section h2{margin:0 0 8px;font-size:clamp(20px,2.4vw,26px);}
+    .section p{color:var(--muted);margin:0 0 14px}
+
+    .compare{
+      display:grid;gap:14px;
+      grid-template-columns:1fr 1fr;
+    }
+    @media (max-width:900px){.compare{grid-template-columns:1fr}}
+
+    .col{
+      border:1px solid var(--border);
+      border-radius:var(--radius-sm);
+      padding:18px;
+      background:rgba(255,255,255,0.03);
+    }
+    .col h3{margin:0 0 10px;font-size:16px}
+    ul{margin:0;padding-left:18px;color:var(--muted);font-size:13.5px}
+    li{margin:6px 0}
+
+    .pricing{
+      display:grid;gap:14px;
+      grid-template-columns:1.2fr 0.8fr;
+      align-items:stretch;
+    }
+    @media (max-width:900px){.pricing{grid-template-columns:1fr}}
+
+    .price-card{
+      background:linear-gradient(135deg,rgba(122,162,255,0.10),rgba(139,255,207,0.08)),rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.14);
+      border-radius:var(--radius);
+      padding:26px;
+      box-shadow:var(--shadow);
+    }
+    .price{
+      font-size:40px;font-weight:800;letter-spacing:-0.8px;
+      margin:8px 0 6px;
+    }
+    .price small{font-size:14px;color:var(--muted);font-weight:500}
+    .fine{color:var(--muted);font-size:12.5px}
+
+    details{
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:12px 14px;
+      background:rgba(255,255,255,0.03);
+      margin:8px 0;
+    }
+    summary{cursor:pointer;font-weight:600;font-size:14.5px}
+    details p{margin:8px 0 0;color:var(--muted);font-size:13.5px}
+
+    .footer{
+      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+      color:var(--muted);
+      font-size:12.5px;
+      margin-top:46px;
+      padding-top:14px;
+      border-top:1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="nav">
+      <div class="brand">
+        <span class="brand-badge">AP</span>
+        <span>AP Systems Lab</span>
+      </div>
+      <div class="nav-links">
+        <a href="../">Home</a>
+        <a href="#product">Product</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div class="card">
+        <span class="pill">WordPress • Internal link audit</span>
+        <h1>Find orphan and underlinked content in minutes.</h1>
+        <p class="sub">
+          AP Link Audit scans your posts and pages for internal linking gaps, then gives you a
+          simple priority list so you know what to fix first.
+        </p>
+
+        <div class="points">
+          <div class="point">
+            <span class="dot"></span>
+            <div><strong>Orphan content.</strong> Quickly see posts with zero inbound internal links.</div>
+          </div>
+          <div class="point">
+            <span class="dot"></span>
+            <div><strong>Low-link content.</strong> Spot items with only one or two inbound links.</div>
+          </div>
+          <div class="point">
+            <span class="dot"></span>
+            <div><strong>Clear priorities.</strong> One list you can work through, without spreadsheets.</div>
+          </div>
+        </div>
+
+        <div class="btns">
+          <a class="btn btn-primary" href="https://wordpress.org/plugins/ap-link-audit/" target="_blank" rel="noopener">
+            Get Free Version
+          </a>
+          <a class="btn btn-ghost" href="#pricing">Upgrade to Pro</a>
+        </div>
+        <div class="fine" style="margin-top:10px;">
+          Free gives you the core audit. Pro adds export, larger fix lists, and advanced exclusions.
+        </div>
+      </div>
+
+      <div class="preview">
+        <strong>How AP Link Audit looks</strong>
+
+        <div class="preview-box">
+          <img src="../assets/img/link-audit-dashboard.png" alt="AP Link Audit results table" style="width:100%;border-radius:10px;">
+        </div>
+
+        <div class="preview-box">
+          <img src="../assets/img/link-audit-overview.png" alt="AP Link Audit overview metrics" style="width:100%;border-radius:10px;">
+        </div>
+      </div>
+    </div>
+
+    <div id="product" class="section">
+      <h2>What AP Link Audit does</h2>
+      <p>
+        AP Link Audit is a lightweight internal linking audit plugin for WordPress. It scans your
+        published content and highlights:
+      </p>
+      <ul>
+        <li><strong>Orphan content</strong> – posts and pages with no inbound internal links.</li>
+        <li><strong>Underlinked content</strong> – items with only 1–2 inbound internal links.</li>
+        <li><strong>A simple priority list</strong> – so you know what to fix first.</li>
+      </ul>
+      <p>
+        It runs as a manual audit. You’re in control of when you scan, what you export, and how you
+        action the results.
+      </p>
+    </div>
+
+    <div id="pricing" class="section">
+      <h2>Free vs Pro</h2>
+      <p>Free is enough to start fixing your internal links. Pro speeds up the workflow.</p>
+
+      <div class="compare" style="margin-bottom:18px;">
+        <div class="col">
+          <h3>Free</h3>
+          <ul>
+            <li>Scan posts and pages for orphan/low-link items.</li>
+            <li>Overview counts: scanned, orphan, low inbound.</li>
+            <li>Priority list inside the WordPress admin.</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h3>Pro</h3>
+          <ul>
+            <li>Expanded priority list for larger sites.</li>
+            <li>CSV export for fix-lists, agencies, or VA hand-off.</li>
+            <li>Advanced exclusions (post types, categories and rules).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pricing">
+        <div class="price-card">
+          <span class="pill">Launch price</span>
+          <div class="price">$39 <small>/ year</small></div>
+          <ul>
+            <li>AP Link Audit Pro plugin download.</li>
+            <li>Updates and support for 12 months.</li>
+            <li>Use on one production site (plus a staging copy).</li>
+          </ul>
+          <div class="btns" style="margin-top:14px;">
+            <a class="btn btn-primary" href="#" data-buy-pro="1" target="_blank" rel="noopener">
+              Buy AP Link Audit Pro
+            </a>
+            <a class="btn btn-ghost" href="https://wordpress.org/plugins/ap-link-audit/#description" target="_blank" rel="noopener">
+              View on WordPress.org
+            </a>
+          </div>
+          <div class="fine" style="margin-top:10px;">
+            You’ll receive the download link and setup instructions in your Stripe receipt right
+            after purchase.
+          </div>
+        </div>
+
+        <div class="col">
+          <h3>Who Pro is for</h3>
+          <ul>
+            <li>Site owners working through a big backlog of content.</li>
+            <li>Agencies and SEOs who prefer CSV fix-lists.</li>
+            <li>Anyone who wants a clear, repeatable audit each quarter.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="faq" class="section">
+      <h2>FAQ</h2>
+
+      <details>
+        <summary>Will the free version stay free?</summary>
+        <p>Yes. The free plugin on WordPress.org will remain free and fully usable.</p>
+      </details>
+
+      <details>
+        <summary>Does AP Link Audit change my theme or front-end?</summary>
+        <p>No. It is an admin-only tool – it doesn’t touch your theme or front-end output.</p>
+      </details>
+
+      <details>
+        <summary>How do I get Pro after purchase?</summary>
+        <p>You’ll receive a download link and instructions in your Stripe receipt.</p>
+      </details>
+    </div>
+
+    <div class="footer">
+      <div>© <span id="year"></span> AP Systems Lab</div>
+      <div>Lightweight WordPress tools for business workflows.</div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Stripe payment link for AP Link Audit Pro
+    const STRIPE_LINK = "https://buy.stripe.com/cNi5kF4XSasH4ef1nldjO0m";
+    document.querySelectorAll('a[data-buy-pro="1"]').forEach(a => {
+      a.href = STRIPE_LINK;
+    });
+  </script>
+</body>
+</html>
