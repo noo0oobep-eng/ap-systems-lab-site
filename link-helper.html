@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AP Internal Linking Helper — AP Systems Lab</title>
+
+  <style>
+    :root{
+      --bg: #0b1020;
+      --panel: rgba(255,255,255,0.04);
+      --panel-2: rgba(255,255,255,0.02);
+      --border: rgba(255,255,255,0.08);
+      --text: #f4f7ff;
+      --muted: rgba(244,247,255,0.68);
+      --radius: 16px;
+      --radius-sm: 12px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:
+        radial-gradient(1200px 700px at 10% -10%, rgba(122,162,255,0.12), transparent 60%),
+        radial-gradient(900px 600px at 90% 10%, rgba(139,255,207,0.10), transparent 55%),
+        var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.45;
+    }
+
+    .wrap{
+      width:min(1100px, 92vw);
+      margin: 28px auto 40px;
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      padding: 14px 16px;
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--panel);
+      backdrop-filter: blur(8px);
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:700;
+      letter-spacing: 0.2px;
+    }
+    .brand-badge{
+      width:28px; height:28px;
+      display:inline-flex; align-items:center; justify-content:center;
+      border-radius: 9px;
+      background: linear-gradient(135deg, rgba(122,162,255,0.25), rgba(139,255,207,0.22));
+      border:1px solid rgba(255,255,255,0.12);
+      font-size: 12px;
+    }
+    .nav-links{
+      display:flex; gap: 12px; flex-wrap:wrap;
+    }
+    .nav a{
+      color: var(--muted);
+      text-decoration:none;
+      font-size: 12.8px;
+      font-weight: 600;
+      padding: 6px 8px;
+      border-radius: 8px;
+    }
+    .nav a:hover{color: var(--text); background: rgba(255,255,255,0.05)}
+
+    .hero{
+      margin-top: 22px;
+      display:grid;
+      gap: 20px;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: start;
+    }
+    @media (max-width: 900px){
+      .hero{grid-template-columns: 1fr}
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent), var(--panel);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .pill{
+      display:inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--muted);
+      border:1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.03);
+      letter-spacing: 0.25px;
+    }
+
+    h1{
+      margin: 12px 0 10px;
+      font-size: clamp(28px, 3.4vw, 38px);
+      line-height: 1.12;
+    }
+
+    .sub{
+      color: var(--muted);
+      font-size: 15px;
+      margin: 0 0 16px;
+    }
+
+    .hero-points{
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .hero-points li{margin:4px 0;}
+
+    .btns{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      margin-top: 16px;
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight:600; font-size:14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      text-decoration:none;
+      white-space:nowrap;
+    }
+    .btn-primary{
+      background: linear-gradient(135deg, rgba(122,162,255,0.18), rgba(139,255,207,0.14));
+      border-color: rgba(255,255,255,0.14);
+    }
+    .btn-ghost{color:var(--muted)}
+
+    .section{
+      margin-top: 32px;
+      background: rgba(255,255,255,0.02);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 26px;
+    }
+    .section h2{
+      margin: 0 0 10px;
+      font-size: clamp(20px, 2.3vw, 26px);
+    }
+    .section p{margin: 0 0 12px; color: var(--muted); font-size:14px;}
+
+    .grid-3{
+      display:grid;
+      gap:14px;
+      grid-template-columns:repeat(3,1fr);
+    }
+    @media(max-width:900px){.grid-3{grid-template-columns:1fr}}
+
+    .feat{
+      padding:16px;
+      border-radius:var(--radius-sm);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.03);
+    }
+    .feat h3{margin:0 0 6px;font-size:15.5px}
+    .feat p{margin:0;font-size:13.5px;color:var(--muted);}
+
+    .compare{
+      display:grid;
+      gap:14px;
+      grid-template-columns:1fr 1fr;
+    }
+    @media(max-width:900px){.compare{grid-template-columns:1fr}}
+
+    .col{
+      padding:18px;
+      border-radius:var(--radius-sm);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.03);
+    }
+    .col h3{margin:0 0 8px;font-size:16px}
+    ul{margin:0 0 8px;padding-left:18px;color:var(--muted);font-size:13.5px}
+    li{margin:4px 0}
+
+    .preview{
+      background: var(--panel-2);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:20px;
+      box-shadow:var(--shadow);
+      display:grid;
+      gap:12px;
+      align-content:flex-start;
+    }
+    .preview h2{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+    .preview-box{
+      border-radius:12px;
+      background:rgba(255,255,255,0.02);
+      padding:10px;
+      border:1px solid rgba(255,255,255,0.10);
+    }
+    .preview-box img{
+      width:100%;
+      display:block;
+      border-radius:10px;
+    }
+    .preview-note{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:2px;
+    }
+
+    details{
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:12px 14px;
+      background:rgba(255,255,255,0.03);
+      margin:8px 0;
+    }
+    summary{cursor:pointer;font-weight:600;font-size:14.5px}
+    details p{margin:8px 0 0;color:var(--muted);font-size:13.5px}
+
+    .footer{
+      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+      color:var(--muted);
+      font-size:12.5px;
+      margin-top:32px;
+      padding-top:12px;
+      border-top:1px solid var(--border);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="nav">
+      <div class="brand">
+        <span class="brand-badge">AP</span>
+        <span>AP Systems Lab</span>
+      </div>
+      <div class="nav-links">
+        <a href="index.html">All products</a>
+        <a href="#pro">Pro</a>
+        <a href="#compare">Free vs Pro</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div class="card">
+        <span class="pill">AP Internal Linking Helper</span>
+        <h1>Internal links while you write — not after.</h1>
+        <p class="sub">
+          AP Internal Linking Helper adds an editor-side panel that suggests internal links
+          as you draft posts and pages. No separate audit, no hunting through search.
+        </p>
+
+        <ul class="hero-points">
+          <li>See useful internal link targets for the post you’re editing.</li>
+          <li>Stop bouncing between the editor and separate search tools.</li>
+          <li>Keep internal linking as a small, automatic step in your publishing flow.</li>
+        </ul>
+
+        <div class="btns">
+          <a class="btn btn-primary" data-buy="link-helper-pro" target="_blank" rel="noopener">
+            Buy Internal Linking Helper Pro
+          </a>
+          <a class="btn btn-ghost" href="https://wordpress.org/plugins/ap-internal-linking-helper/" target="_blank" rel="noopener">
+            Get the free version
+          </a>
+        </div>
+        <p style="margin-top:10px;font-size:12.5px;color:var(--muted);">
+          Free stays useful on its own. Pro is for when you’re publishing regularly and want more speed and control.
+        </p>
+      </div>
+
+      <div class="preview">
+        <h2>Inside the editor</h2>
+        <div class="preview-box">
+          <img src="assets/img/Pro1 (1).png" alt="AP Internal Linking Helper sidebar in the editor">
+          <div class="preview-note">Sidebar with suggestions next to your content.</div>
+        </div>
+        <div class="preview-box">
+          <img src="assets/img/Pro1 (2).png" alt="Internal link suggestions list">
+          <div class="preview-note">Quick actions to open or copy internal links.</div>
+        </div>
+        <div class="preview-box">
+          <img src="assets/img/Pro1 (3).png" alt="Plugin settings for AP Internal Linking Helper Pro">
+          <div class="preview-note">Pro adds extra controls over suggestions and behaviour.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="about">
+      <h2>What it does</h2>
+      <p>
+        This plugin is for people who actually write: bloggers, niche site builders, and small business owners
+        who publish content themselves. Instead of running a separate audit every time, it brings internal link
+        opportunities into the place you’re already working — the editor.
+      </p>
+      <div class="grid-3">
+        <div class="feat">
+          <h3>Editor sidebar</h3>
+          <p>Open a focused panel inside the block editor with suggested internal links for the post you’re editing.</p>
+        </div>
+        <div class="feat">
+          <h3>Faster publishing</h3>
+          <p>Turn “add 2–3 internal links” into a quick end-of-draft step instead of a separate task.</p>
+        </div>
+        <div class="feat">
+          <h3>Lightweight by design</h3>
+          <p>No dashboards, no front-end widgets, no tracking. Just an editor helper.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="pro">
+      <h2>What Pro adds</h2>
+      <p>
+        The free plugin gets you into the habit of linking as you go. Pro removes the remaining friction and
+        gives you more control over what shows up in the sidebar.
+      </p>
+      <div class="grid-3">
+        <div class="feat">
+          <h3>One-click insert</h3>
+          <p>Select text, pick a suggestion, and insert the link directly without leaving the editor flow.</p>
+        </div>
+        <div class="feat">
+          <h3>Deeper suggestions</h3>
+          <p>See more potential targets per post so older but relevant content doesn’t stay buried.</p>
+        </div>
+        <div class="feat">
+          <h3>Rules & exclusions</h3>
+          <p>Tell the plugin what to skip or prioritise so suggestions stay focused instead of noisy.</p>
+        </div>
+      </div>
+
+      <div class="btns" style="margin-top:16px;">
+        <a class="btn btn-primary" data-buy="link-helper-pro" target="_blank" rel="noopener">
+          Buy Internal Linking Helper Pro
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/noo0oobep-eng/ap-internal-linking-helper" target="_blank" rel="noopener">
+          View code on GitHub
+        </a>
+      </div>
+    </div>
+
+    <div class="section" id="compare">
+      <h2>Free vs Pro</h2>
+      <p>Free is enough to start. Pro is for when you’re serious about internal links.</p>
+      <div class="compare">
+        <div class="col">
+          <h3>Free</h3>
+          <ul>
+            <li>Editor sidebar inside the block editor.</li>
+            <li>Basic internal link suggestions per post.</li>
+            <li>Open and copy link actions.</li>
+            <li>No tracking, no front-end output.</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h3>Pro</h3>
+          <ul>
+            <li><strong>One-click insert into selected text.</strong></li>
+            <li>Expanded suggestions so more content is surfaced.</li>
+            <li>Keyword/phrase matching to refine suggestions.</li>
+            <li>Rules and exclusions to reduce noise.</li>
+            <li>Priority support for bug reports and questions.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Who it’s for</h2>
+      <p>
+        This is not a giant all-in-one SEO suite. It’s a small tool built for:
+      </p>
+      <ul>
+        <li>Writers and editors who live in the block editor and want internal linking to be part of the writing flow.</li>
+        <li>Niche site owners who publish regularly and care about giving old content more internal support.</li>
+        <li>Small businesses who need better internal linking without another heavy dashboard to maintain.</li>
+      </ul>
+    </div>
+
+    <div class="section" id="faq">
+      <h2>FAQ</h2>
+
+      <details>
+        <summary>Does the free version stay useful on its own?</summary>
+        <p>
+          Yes. The free version is designed to stand on its own as a simple, editor-based suggestion tool.
+          Pro is an optional upgrade for extra speed and control.
+        </p>
+      </details>
+
+      <details>
+        <summary>Does this plugin add anything to the front end?</summary>
+        <p>
+          No. It’s an editor helper only. It doesn’t inject widgets or banners on the public site.
+        </p>
+      </details>
+
+      <details>
+        <summary>How do I get Pro after I pay?</summary>
+        <p>
+          After checkout via Stripe, you’ll receive a download link in your receipt. Download the ZIP, upload it to
+          WordPress as a plugin, and activate it alongside the free version.
+        </p>
+      </details>
+
+      <details>
+        <summary>Will you add more features?</summary>
+        <p>
+          Yes, but carefully. The goal is to keep this focused and understandable. Future updates will stay aligned
+          with that — making internal linking easier without turning it into another complex system to manage.
+        </p>
+      </details>
+    </div>
+
+    <div class="footer">
+      <div>© <span id="year"></span> AP Systems Lab</div>
+      <div><a href="index.html" style="color:inherit;text-decoration:none;">Back to all products</a></div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Stripe link for Internal Linking Helper Pro
+    const STRIPE_LINK_HELPER = "https://buy.stripe.com/bJe28taicfN13ab4zxdjO0l";
+
+    document.querySelectorAll('[data-buy="link-helper-pro"]').forEach(a => {
+      a.href = STRIPE_LINK_HELPER;
+    });
+  </script>
+</body>
+</html>
