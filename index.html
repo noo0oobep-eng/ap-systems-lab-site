@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AP Systems Lab — AP Internal Linking Helper</title>
+  <title>AP Systems Lab — AP Link Audit & Pro</title>
 
   <style>
     :root{
@@ -21,9 +21,10 @@
     *{box-sizing:border-box}
     body{
       margin:0;
-      background: radial-gradient(1200px 700px at 10% -10%, rgba(122,162,255,0.12), transparent 60%),
-                  radial-gradient(900px 600px at 90% 10%, rgba(139,255,207,0.10), transparent 55%),
-                  var(--bg);
+      background:
+        radial-gradient(1200px 700px at 10% -10%, rgba(122,162,255,0.12), transparent 60%),
+        radial-gradient(900px 600px at 90% 10%, rgba(139,255,207,0.10), transparent 55%),
+        var(--bg);
       color: var(--text);
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.45;
@@ -274,41 +275,54 @@
 
     <div class="hero">
       <div class="card">
-        <span class="pill">WordPress • Editor-first • Internal links</span>
-        <h1>Internal linking that happens while you write.</h1>
+        <span class="pill">WordPress • Internal linking • Audit</span>
+        <h1>See where your internal links are failing you.</h1>
         <p class="sub">
-          AP Internal Linking Helper adds a focused sidebar to the block editor with fast internal link suggestions.
-          No setup. No bloat.
+          AP Link Audit scans your published content and highlights orphan and underlinked posts,
+          then gives you a simple priority list so you know what to fix first.
         </p>
 
         <div class="points">
-          <div class="point"><span class="dot"></span><div><strong>Stop hunting old posts.</strong> Suggestions appear in the editor.</div></div>
-          <div class="point"><span class="dot"></span><div><strong>Build better SEO habits.</strong> Make internal links a default step.</div></div>
-          <div class="point"><span class="dot"></span><div><strong>Low risk, low weight.</strong> Editor-only and performance-friendly.</div></div>
+          <div class="point">
+            <span class="dot"></span>
+            <div><strong>Orphan content.</strong> Posts and pages with no inbound internal links.</div>
+          </div>
+          <div class="point">
+            <span class="dot"></span>
+            <div><strong>Underlinked content.</strong> Items with only 1–2 inbound links dragging down their potential.</div>
+          </div>
+          <div class="point">
+            <span class="dot"></span>
+            <div><strong>Clear starting point.</strong> A short priority list so you can fix 10 things, not stare at 1,000 URLs.</div>
+          </div>
         </div>
 
         <div class="btns">
-          <a class="btn btn-primary" href="#" data-buy-pro="1" target="_blank" rel="noopener">Buy Pro (Stripe)</a>
-          <a class="btn btn-ghost" href="#compare">See Pro features</a>
+          <a class="btn btn-primary"
+             href="https://wordpress.org/plugins/ap-link-audit/"
+             target="_blank" rel="noopener">
+            Download free on WordPress.org
+          </a>
+          <a class="btn btn-ghost" href="#pro">See Pro upgrade</a>
         </div>
         <div class="fine" style="margin-top:10px;">
-          Pro will unlock one-click insert, expanded suggestions, keyword matching, and exclusions.
+          Free gives you the core audit and a focused list. Pro removes the caps and adds deeper filters and exports.
         </div>
       </div>
 
       <div class="preview">
-        <strong>Product visuals</strong>
+        <strong>AP Link Audit in action</strong>
 
         <div class="preview-box">
-          <img src="assets/img/Pro1 (1).png" alt="AP Link Helper Pro sidebar" style="width:100%; border-radius:10px;">
+          <img src="assets/img/Pro1 (1).png" alt="AP Link Audit overview screen" style="width:100%; border-radius:10px;">
         </div>
 
         <div class="preview-box">
-          <img src="assets/img/Pro1 (2).png" alt="AP Link Helper Pro suggestions" style="width:100%; border-radius:10px;">
+          <img src="assets/img/Pro1 (2).png" alt="Internal linking audit priority list" style="width:100%; border-radius:10px;">
         </div>
 
         <div class="preview-box">
-          <img src="assets/img/Pro1 (3).png" alt="AP Link Helper Pro plugin screen" style="width:100%; border-radius:10px;">
+          <img src="assets/img/Pro1 (3).png" alt="AP Link Audit results table" style="width:100%; border-radius:10px;">
         </div>
       </div>
     </div>
@@ -318,102 +332,117 @@
       <h2>About AP Systems Lab</h2>
 
       <p>
-        We want AP Systems Lab to stand for good judgement and careful craft. That means choosing problems worth solving,
-        resisting feature sprawl, and building tools that we’re proud to put our name on for the long term. We’re not interested
-        in a crowded catalog for its own sake. We’re here to build a small, trustworthy collection of plugins that reflect our
-        standards — work that feels intentional, consistent, and built to last.
+        AP Systems Lab is a small studio focused on practical WordPress tools. The goal is simple:
+        help site owners make better decisions with less noise. That means choosing problems worth
+        solving, resisting feature sprawl, and building plugins that we’re happy to support for years.
       </p>
 
       <p>
-        That belief shapes our approach. We start by researching real workflows and looking for problems that are specific,
-        repeatable, and worth solving. We design for minimal setup, clean UI, and predictable behavior, aiming for lightweight
-        plugins that integrate naturally into WordPress instead of fighting it. We build generous free versions that stand on their
-        own, and we treat Pro as a thoughtful, clearly superior extension—not a paywall for basics. Every release is guided by a
-        simple standard: if it doesn’t reduce confusion, eliminate busywork, or meaningfully improve control or security, it doesn’t ship.
+        We start with real workflows: how people actually write, edit, and maintain their sites.
+        From there we design tools that stay close to WordPress itself — minimal setup, clean UI,
+        predictable behaviour. Free versions are complete and useful on their own; Pro versions add
+        depth, not basic access gates.
       </p>
 
       <p>
-        We create WordPress plugins that help people work with more clarity, confidence, and consistency. Our releases follow a
-        simple principle: a strong foundation, with Pro features that add clear depth for those who need more. We’ll continue to
-        expand the product line as we find problems that deserve a better solution.
+        AP Link Audit is the first of a small family of plugins aimed at content structure:
+        seeing where internal links are missing, deciding what to fix first, and building a healthier
+        site over time without a huge SEO stack.
       </p>
     </div>
 
-    <!-- AP Link Helper Pro section with AI -->
+    <!-- AP Link Audit Pro section -->
     <div id="pro" class="section">
-      <h2>AP Link Helper Pro</h2>
+      <h2>AP Link Audit Pro</h2>
       <p>
-        AP Link Helper Pro builds on the free plugin with faster workflows, more control over suggestions, and optional AI help
-        when you want extra ideas. It’s for people who publish regularly and want internal linking to feel like part of the writing
-        flow, not a separate chore.
+        AP Link Audit Pro is the premium add-on for the free plugin. It keeps the same simple workflow,
+        but removes the caps and adds tools for people who manage serious content libraries or client sites.
       </p>
 
       <div class="grid-3">
         <div class="feat">
-          <h3>AI-assisted suggestions</h3>
-          <p>Highlight a paragraph and use AI to refine link ideas and anchor text based on what you’re writing.</p>
+          <h3>Unlimited priority list</h3>
+          <p>See the full list of orphan and low-link URLs instead of just the top slice.</p>
         </div>
         <div class="feat">
-          <h3>Expanded suggestions</h3>
-          <p>Surface more relevant internal link options per post so older, useful content doesn’t stay buried.</p>
+          <h3>Unlimited CSV exports</h3>
+          <p>Export all results in one click for spreadsheets, handoff to writers, or agency reporting.</p>
         </div>
         <div class="feat">
-          <h3>Rules &amp; exclusions</h3>
-          <p>Set simple rules for what to ignore or prioritise so suggestions stay focused instead of noisy.</p>
+          <h3>Advanced exclusions</h3>
+          <p>Exclude categories, post types and sections so the audit focuses on the content that matters.</p>
         </div>
       </div>
 
-      <div class="btns" style="margin-top:14px;">
-        <a class="btn btn-primary" href="#" data-buy-pro="1" target="_blank" rel="noopener">Buy AP Link Helper Pro</a>
+      <div class="grid-3" style="margin-top:14px;">
+        <div class="feat">
+          <h3>Lightweight by design</h3>
+          <p>Runs as a manual audit when you choose. No background cron loops, no front-end changes.</p>
+        </div>
+        <div class="feat">
+          <h3>Clear next actions</h3>
+          <p>Each row links straight to the editor so you can fix and move on without extra steps.</p>
+        </div>
+        <div class="feat">
+          <h3>Room to grow</h3>
+          <p>Pro is the base for future upgrades like clustering, topic groups, and smarter link suggestions.</p>
+        </div>
+      </div>
+
+      <div class="btns" style="margin-top:18px;">
+        <a class="btn btn-primary" href="#" data-buy-pro="1" target="_blank" rel="noopener">
+          Get AP Link Audit Pro
+        </a>
         <a class="btn btn-ghost" href="#pricing">See pricing</a>
       </div>
 
       <div class="fine" style="margin-top:10px;">
-        Pro is built to remove the last bits of friction after you’ve formed the linking habit with Free.
+        Free is for learning where you stand. Pro is for teams who want a repeatable internal-linking workflow.
       </div>
     </div>
 
     <div id="product" class="section">
-      <h2>What this plugin is for</h2>
-      <p>A small tool built for writers and business owners who want better internal linking without the time sink.</p>
+      <h2>What the free plugin does</h2>
+      <p>A simple internal linking audit for site owners who want clarity without a heavy SEO suite.</p>
       <div class="grid-3">
         <div class="feat">
-          <h3>Fast suggestions</h3>
-          <p>Surface useful internal links inside the editor.</p>
+          <h3>Scans published content</h3>
+          <p>Looks at your posts and pages and counts incoming internal links.</p>
         </div>
         <div class="feat">
-          <h3>Cleaner workflow</h3>
-          <p>Reduce tab switching and manual searching.</p>
+          <h3>Finds weak spots</h3>
+          <p>Highlights orphan content and URLs with only 1–2 internal links.</p>
         </div>
         <div class="feat">
-          <h3>Minimal footprint</h3>
-          <p>Designed to stay lightweight and focused.</p>
+          <h3>Gives you a short list</h3>
+          <p>Shows a simple priority list so you can fix a handful of URLs at a time.</p>
         </div>
       </div>
     </div>
 
     <div id="compare" class="section">
       <h2>Free vs Pro</h2>
-      <p>Free builds the habit. Pro removes the remaining friction.</p>
+      <p>Free builds awareness. Pro gives you depth and control.</p>
       <div class="compare">
         <div class="col">
-          <h3>Free</h3>
+          <h3>Free — AP Link Audit</h3>
           <ul>
-            <li>Editor sidebar</li>
-            <li>Basic suggestions</li>
-            <li>Refresh</li>
-            <li>Copy/Open actions</li>
+            <li>Scans posts and pages</li>
+            <li>Finds orphan content</li>
+            <li>Finds underlinked content (1–2 inbound links)</li>
+            <li>Shows a small priority list</li>
+            <li>Quick overview for a single site</li>
           </ul>
         </div>
         <div class="col">
-          <h3>Pro</h3>
+          <h3>Pro — AP Link Audit Pro</h3>
           <ul>
-            <li><strong>One-click insert into selected text</strong></li>
-            <li>25+ suggestions per post</li>
-            <li>Keyword/phrase matching</li>
-            <li>Rules and exclusions for suggestions</li>
-            <li>Optional AI anchor ideas drawn from your content</li>
-            <li>Priority support</li>
+            <li><strong>Unlimited priority fix list</strong></li>
+            <li><strong>Unlimited CSV export of all results</strong></li>
+            <li>Advanced category and post-type exclusions</li>
+            <li>More flexible filters for bigger sites</li>
+            <li>Future upgrades to clustering and smart linking tools</li>
+            <li>Priority support from the developer</li>
           </ul>
         </div>
       </div>
@@ -425,26 +454,30 @@
       <div class="pricing">
         <div class="price-card">
           <span class="pill">Launch price</span>
-          <div class="price">$39 <small>/ year</small></div>
+          <div class="price">$39 <small>one-time</small></div>
           <ul>
-            <li>AP Link Helper Pro ZIP</li>
-            <li>Updates for 12 months</li>
-            <li>Priority support</li>
+            <li>AP Link Audit Pro plugin download</li>
+            <li>All current Pro features unlocked</li>
+            <li>Updates for all 1.x releases</li>
+            <li>Use on any sites you manage</li>
           </ul>
           <div class="btns" style="margin-top:14px;">
-            <a class="btn btn-primary" href="#" data-buy-pro="1" target="_blank" rel="noopener">Buy Pro (Stripe)</a>
+            <a class="btn btn-primary" href="#" data-buy-pro="1" target="_blank" rel="noopener">
+              Get AP Link Audit Pro
+            </a>
             <a class="btn btn-ghost" href="#faq">Questions?</a>
           </div>
           <div class="fine" style="margin-top:10px;">
-            You can add lifetime pricing later if you want.
+            Payments are handled securely by Stripe. You’ll receive the download link and quick-start notes
+            right after checkout.
           </div>
         </div>
         <div class="col">
-          <h3>Designed for busy users</h3>
+          <h3>Who Pro is for</h3>
           <ul>
-            <li>Small plugin, clear benefit.</li>
-            <li>Editor-first, minimal setup.</li>
-            <li>Easy upgrade decision.</li>
+            <li>Site owners who publish regularly and want a clearer internal linking plan.</li>
+            <li>Agencies who need exportable reports for clients.</li>
+            <li>Anyone who likes lightweight tools that do one job well.</li>
           </ul>
         </div>
       </div>
@@ -455,17 +488,28 @@
 
       <details>
         <summary>Will the free version stay free?</summary>
-        <p>Yes. The free version stays focused on core editor suggestions.</p>
+        <p>Yes. AP Link Audit will remain a free, fully-functional internal linking audit plugin.</p>
       </details>
 
       <details>
-        <summary>Does this change my theme/front end?</summary>
-        <p>No. It is designed as an editor helper.</p>
+        <summary>Does the plugin change my theme or front end?</summary>
+        <p>No. It only scans content and shows results in a WordPress admin screen.</p>
       </details>
 
       <details>
         <summary>How do I get Pro after purchase?</summary>
-        <p>You’ll receive a download link and instructions in your Stripe receipt.</p>
+        <p>
+          After checkout, Stripe will email you a receipt with a download link and short setup guide.
+          Install it like any other plugin and activate it alongside AP Link Audit.
+        </p>
+      </details>
+
+      <details>
+        <summary>Can I use it on multiple sites?</summary>
+        <p>
+          Yes. The code is GPL-friendly — you can use it on as many sites as you manage. We just ask that
+          you keep the ZIP private and point others to the official purchase link.
+        </p>
       </details>
     </div>
 
@@ -479,7 +523,7 @@
     document.getElementById("year").textContent = new Date().getFullYear();
 
     // Stripe payment link for all "Buy Pro" buttons
-    const STRIPE_LINK = "https://buy.stripe.com/bJe28taicfN13ab4zxdjO0l";
+    const STRIPE_LINK = "https://buy.stripe.com/cNi5kF4XSasH4ef1nldjO0m";
 
     document.querySelectorAll('a[data-buy-pro="1"]').forEach(a => {
       a.href = STRIPE_LINK;
