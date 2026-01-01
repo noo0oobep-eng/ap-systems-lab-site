@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AP Systems Lab — AP Link Audit & Pro</title>
+  <title>AP Systems Lab — Lightweight WordPress Tools</title>
 
   <style>
     :root{
@@ -26,237 +26,144 @@
         radial-gradient(900px 600px at 90% 10%, rgba(139,255,207,0.10), transparent 55%),
         var(--bg);
       color: var(--text);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.45;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      line-height:1.45;
     }
 
     .wrap{
-      width:min(1100px, 92vw);
-      margin: 28px auto 40px;
+      width:min(1100px,92vw);
+      margin:28px auto 40px;
     }
 
     .nav{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap: 14px;
-      padding: 14px 16px;
+      gap:14px;
+      padding:14px 16px;
       border:1px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--panel);
-      backdrop-filter: blur(8px);
+      border-radius:var(--radius);
+      background:var(--panel);
+      backdrop-filter:blur(8px);
     }
     .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:700;
-      letter-spacing: 0.2px;
+      display:flex;align-items:center;gap:10px;
+      font-weight:700;letter-spacing:0.2px;
     }
     .brand-badge{
-      width:28px; height:28px;
-      display:inline-flex; align-items:center; justify-content:center;
-      border-radius: 9px;
-      background: linear-gradient(135deg, rgba(122,162,255,0.25), rgba(139,255,207,0.22));
+      width:28px;height:28px;
+      display:inline-flex;align-items:center;justify-content:center;
+      border-radius:9px;
+      background:linear-gradient(135deg,rgba(122,162,255,0.25),rgba(139,255,207,0.22));
       border:1px solid rgba(255,255,255,0.12);
-      font-size: 12px;
+      font-size:12px;
     }
-    .nav-links{
-      display:flex; gap: 12px; flex-wrap:wrap;
-    }
+    .nav-links{display:flex;gap:12px;flex-wrap:wrap;}
     .nav a{
-      color: var(--muted);
+      color:var(--muted);
       text-decoration:none;
-      font-size: 12.8px;
-      font-weight: 600;
-      padding: 6px 8px;
-      border-radius: 8px;
+      font-size:12.8px;
+      font-weight:600;
+      padding:6px 8px;
+      border-radius:8px;
     }
-    .nav a:hover{color: var(--text); background: rgba(255,255,255,0.05)}
+    .nav a:hover{color:var(--text);background:rgba(255,255,255,0.05)}
 
     .hero{
-      margin-top: 18px;
+      margin-top:22px;
       display:grid;
-      gap: 18px;
-      grid-template-columns: 1.1fr 0.9fr;
-      align-items: start;
+      gap:20px;
+      grid-template-columns:1.2fr 0.8fr;
+      align-items:start;
     }
-    @media (max-width: 900px){
-      .hero{grid-template-columns: 1fr}
-    }
+    @media (max-width:900px){.hero{grid-template-columns:1fr}}
 
     .card{
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent), var(--panel);
+      background:linear-gradient(180deg,rgba(255,255,255,0.03),transparent),var(--panel);
       border:1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px;
-      box-shadow: var(--shadow);
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow:var(--shadow);
     }
-
     .pill{
       display:inline-flex;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 11.5px;
-      font-weight: 700;
-      color: var(--muted);
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:11.5px;
+      font-weight:700;
+      color:var(--muted);
       border:1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.03);
-      letter-spacing: 0.25px;
+      background:rgba(255,255,255,0.03);
+      letter-spacing:0.25px;
     }
-
     h1{
-      margin: 10px 0 10px;
-      font-size: clamp(28px, 3.5vw, 38px);
-      line-height: 1.12;
+      margin:12px 0 10px;
+      font-size:clamp(28px,3.4vw,38px);
+      line-height:1.12;
     }
-
     .sub{
-      color: var(--muted);
-      font-size: 15px;
-      margin: 0 0 16px;
+      color:var(--muted);
+      font-size:15px;
+      margin:0 0 16px;
     }
-
-    .points{
-      display:grid; gap:10px;
-      margin-top: 14px;
-    }
-    .point{
-      display:flex; gap:10px; align-items:flex-start;
-      padding: 10px 10px;
-      border:1px solid var(--border);
-      border-radius: 12px;
-      background: rgba(255,255,255,0.02);
-    }
-    .dot{
-      width:10px; height:10px; margin-top: 6px;
-      border-radius:50%;
-      background: linear-gradient(135deg, rgba(122,162,255,0.9), rgba(139,255,207,0.9));
-      box-shadow: 0 0 0 3px rgba(255,255,255,0.03);
-      flex: 0 0 auto;
-    }
-
-    .btns{display:flex; gap: 10px; flex-wrap:wrap; margin-top: 14px}
-
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding: 12px 16px;
-      border-radius: 12px;
-      font-weight:600; font-size:14px;
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:12px 16px;
+      border-radius:12px;
+      font-weight:600;font-size:14px;
       border:1px solid var(--border);
-      background: rgba(255,255,255,0.03);
-      color: var(--text);
+      background:rgba(255,255,255,0.03);
+      color:var(--text);
       text-decoration:none;
     }
     .btn-primary{
-      background: linear-gradient(135deg, rgba(122,162,255,0.18), rgba(139,255,207,0.14));
-      border-color: rgba(255,255,255,0.14);
+      background:linear-gradient(135deg,rgba(122,162,255,0.18),rgba(139,255,207,0.14));
+      border-color:rgba(255,255,255,0.14);
     }
     .btn-ghost{color:var(--muted)}
 
-    .preview{
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent), var(--panel-2);
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 22px;
-      box-shadow: var(--shadow);
-      min-height: 280px;
-      display:grid; gap:14px; align-content:start;
-    }
-    .preview-box{
-      border:1px dashed rgba(255,255,255,0.18);
-      border-radius: 12px;
-      padding: 14px;
-      color: var(--muted);
-      font-size: 13px;
-      background: rgba(255,255,255,0.02);
-    }
-
     .section{
-      margin-top: 46px;
-      background: rgba(255,255,255,0.02);
+      margin-top:40px;
+      background:rgba(255,255,255,0.02);
       border:1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px;
+      border-radius:var(--radius);
+      padding:24px 26px;
     }
     .section h2{
-      margin: 0 0 8px;
-      font-size: clamp(20px, 2.4vw, 26px);
+      margin:0 0 10px;
+      font-size:clamp(20px,2.3vw,26px);
     }
-    .section p{color: var(--muted); margin: 0 0 14px}
+    .section p{margin:0 0 14px;color:var(--muted);font-size:14px;}
 
-    .grid-3{
-      display:grid; gap:12px;
-      grid-template-columns: repeat(3, 1fr);
+    .products{
+      display:grid;
+      gap:14px;
+      grid-template-columns:repeat(2,1fr);
     }
-    @media (max-width: 900px){ .grid-3{grid-template-columns:1fr} }
+    @media (max-width:900px){.products{grid-template-columns:1fr}}
 
-    .feat{
-      padding: 16px;
-      background: rgba(255,255,255,0.03);
+    .prod-card{
+      padding:18px;
+      border-radius:var(--radius-sm);
       border:1px solid var(--border);
-      border-radius: var(--radius-sm);
+      background:rgba(255,255,255,0.03);
     }
-    .feat h3{margin:0 0 6px; font-size:16px}
-    .feat p{margin:0; font-size:13.5px}
-
-    .compare{
-      display:grid; gap:14px;
-      grid-template-columns: 1fr 1fr;
-    }
-    @media (max-width: 900px){ .compare{grid-template-columns:1fr} }
-
-    .col{
-      border:1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 18px;
-      background: rgba(255,255,255,0.03);
-    }
-    .col h3{margin:0 0 10px; font-size:16px}
-    ul{margin:0; padding-left: 18px; color: var(--muted); font-size: 13.5px}
-    li{margin:6px 0}
-
-    .pricing{
-      display:grid; gap:14px;
-      grid-template-columns: 1.2fr 0.8fr;
-      align-items: stretch;
-    }
-    @media (max-width: 900px){ .pricing{grid-template-columns:1fr} }
-
-    .price-card{
-      background: linear-gradient(135deg, rgba(122,162,255,0.10), rgba(139,255,207,0.08)),
-                  rgba(255,255,255,0.03);
-      border:1px solid rgba(255,255,255,0.14);
-      border-radius: var(--radius);
-      padding: 26px;
-      box-shadow: var(--shadow);
-    }
-    .price{
-      font-size: 40px; font-weight:800; letter-spacing:-0.8px;
-      margin: 8px 0 6px;
-    }
-    .price small{font-size: 14px; color: var(--muted); font-weight:500}
-    .fine{color: var(--muted); font-size: 12.5px}
-
-    details{
-      border:1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px 14px;
-      background: rgba(255,255,255,0.03);
-      margin: 8px 0;
-    }
-    summary{cursor:pointer; font-weight:600; font-size:14.5px}
-    details p{margin:8px 0 0; color:var(--muted); font-size:13.5px}
+    .prod-card h3{margin:0 0 8px;font-size:16px}
+    .meta{font-size:12px;color:var(--muted);margin-bottom:10px}
+    ul{margin:0 0 10px;padding-left:18px;color:var(--muted);font-size:13.5px}
+    li{margin:4px 0}
 
     .footer{
-      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
-      color: var(--muted);
-      font-size: 12.5px;
-      margin-top: 46px;
-      padding-top: 14px;
+      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+      color:var(--muted);
+      font-size:12.5px;
+      margin-top:36px;
+      padding-top:12px;
       border-top:1px solid var(--border);
     }
   </style>
 </head>
-
 <body>
   <div class="wrap">
     <div class="nav">
@@ -265,252 +172,83 @@
         <span>AP Systems Lab</span>
       </div>
       <div class="nav-links">
-        <a href="#product">Product</a>
-        <a href="#pro">Pro</a>
-        <a href="#compare">Free vs Pro</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#faq">FAQ</a>
+        <a href="#products">Products</a>
+        <a href="#about">About</a>
       </div>
     </div>
 
     <div class="hero">
       <div class="card">
-        <span class="pill">WordPress • Internal linking • Audit</span>
-        <h1>See where your internal links are failing you.</h1>
+        <span class="pill">WordPress • Plugins for real workflows</span>
+        <h1>Lightweight tools for people who actually run sites.</h1>
         <p class="sub">
-          AP Link Audit scans your published content and highlights orphan and underlinked posts,
-          then gives you a simple priority list so you know what to fix first.
+          AP Systems Lab builds small, focused WordPress plugins for content and site owners.
+          No clutter, no gimmicks – just tools that make day-to-day work easier.
         </p>
-
-        <div class="points">
-          <div class="point">
-            <span class="dot"></span>
-            <div><strong>Orphan content.</strong> Posts and pages with no inbound internal links.</div>
-          </div>
-          <div class="point">
-            <span class="dot"></span>
-            <div><strong>Underlinked content.</strong> Items with only 1–2 inbound links dragging down their potential.</div>
-          </div>
-          <div class="point">
-            <span class="dot"></span>
-            <div><strong>Clear starting point.</strong> A short priority list so you can fix 10 things, not stare at 1,000 URLs.</div>
-          </div>
-        </div>
-
         <div class="btns">
-          <a class="btn btn-primary"
-             href="https://wordpress.org/plugins/ap-link-audit/"
-             target="_blank" rel="noopener">
-            Download free on WordPress.org
-          </a>
-          <a class="btn btn-ghost" href="#pro">See Pro upgrade</a>
-        </div>
-        <div class="fine" style="margin-top:10px;">
-          Free gives you the core audit and a focused list. Pro removes the caps and adds deeper filters and exports.
+          <a class="btn btn-primary" href="./link-audit/">View AP Link Audit</a>
+          <a class="btn btn-ghost" href="./internal-link-helper/">View AP Internal Linking Helper</a>
         </div>
       </div>
 
-      <div class="preview">
-        <strong>AP Link Audit in action</strong>
-
-        <div class="preview-box">
-          <img src="assets/img/Pro1 (1).png" alt="AP Link Audit overview screen" style="width:100%; border-radius:10px;">
-        </div>
-
-        <div class="preview-box">
-          <img src="assets/img/Pro1 (2).png" alt="Internal linking audit priority list" style="width:100%; border-radius:10px;">
-        </div>
-
-        <div class="preview-box">
-          <img src="assets/img/Pro1 (3).png" alt="AP Link Audit results table" style="width:100%; border-radius:10px;">
-        </div>
+      <div class="card">
+        <h2 style="margin-top:0;font-size:18px;">What we focus on</h2>
+        <ul>
+          <li>Editor-first tools that fit naturally into WordPress.</li>
+          <li>Clear purpose: each plugin solves one problem well.</li>
+          <li>Generous free versions; Pro adds depth, not paywalls.</li>
+          <li>Calm UI and predictable behaviour over flashy features.</li>
+        </ul>
       </div>
     </div>
 
-    <!-- Brand / WHY-HOW-WHAT block -->
-    <div class="section" id="about">
-      <h2>About AP Systems Lab</h2>
+    <div id="products" class="section">
+      <h2>Current products</h2>
+      <p>Early-stage toolkit for content sites and small publishers.</p>
 
-      <p>
-        AP Systems Lab is a small studio focused on practical WordPress tools. The goal is simple:
-        help site owners make better decisions with less noise. That means choosing problems worth
-        solving, resisting feature sprawl, and building plugins that we’re happy to support for years.
-      </p>
-
-      <p>
-        We start with real workflows: how people actually write, edit, and maintain their sites.
-        From there we design tools that stay close to WordPress itself — minimal setup, clean UI,
-        predictable behaviour. Free versions are complete and useful on their own; Pro versions add
-        depth, not basic access gates.
-      </p>
-
-      <p>
-        AP Link Audit is the first of a small family of plugins aimed at content structure:
-        seeing where internal links are missing, deciding what to fix first, and building a healthier
-        site over time without a huge SEO stack.
-      </p>
-    </div>
-
-    <!-- AP Link Audit Pro section -->
-    <div id="pro" class="section">
-      <h2>AP Link Audit Pro</h2>
-      <p>
-        AP Link Audit Pro is the premium add-on for the free plugin. It keeps the same simple workflow,
-        but removes the caps and adds tools for people who manage serious content libraries or client sites.
-      </p>
-
-      <div class="grid-3">
-        <div class="feat">
-          <h3>Unlimited priority list</h3>
-          <p>See the full list of orphan and low-link URLs instead of just the top slice.</p>
-        </div>
-        <div class="feat">
-          <h3>Unlimited CSV exports</h3>
-          <p>Export all results in one click for spreadsheets, handoff to writers, or agency reporting.</p>
-        </div>
-        <div class="feat">
-          <h3>Advanced exclusions</h3>
-          <p>Exclude categories, post types and sections so the audit focuses on the content that matters.</p>
-        </div>
-      </div>
-
-      <div class="grid-3" style="margin-top:14px;">
-        <div class="feat">
-          <h3>Lightweight by design</h3>
-          <p>Runs as a manual audit when you choose. No background cron loops, no front-end changes.</p>
-        </div>
-        <div class="feat">
-          <h3>Clear next actions</h3>
-          <p>Each row links straight to the editor so you can fix and move on without extra steps.</p>
-        </div>
-        <div class="feat">
-          <h3>Room to grow</h3>
-          <p>Pro is the base for future upgrades like clustering, topic groups, and smarter link suggestions.</p>
-        </div>
-      </div>
-
-      <div class="btns" style="margin-top:18px;">
-        <a class="btn btn-primary" href="#" data-buy-pro="1" target="_blank" rel="noopener">
-          Get AP Link Audit Pro
-        </a>
-        <a class="btn btn-ghost" href="#pricing">See pricing</a>
-      </div>
-
-      <div class="fine" style="margin-top:10px;">
-        Free is for learning where you stand. Pro is for teams who want a repeatable internal-linking workflow.
-      </div>
-    </div>
-
-    <div id="product" class="section">
-      <h2>What the free plugin does</h2>
-      <p>A simple internal linking audit for site owners who want clarity without a heavy SEO suite.</p>
-      <div class="grid-3">
-        <div class="feat">
-          <h3>Scans published content</h3>
-          <p>Looks at your posts and pages and counts incoming internal links.</p>
-        </div>
-        <div class="feat">
-          <h3>Finds weak spots</h3>
-          <p>Highlights orphan content and URLs with only 1–2 internal links.</p>
-        </div>
-        <div class="feat">
-          <h3>Gives you a short list</h3>
-          <p>Shows a simple priority list so you can fix a handful of URLs at a time.</p>
-        </div>
-      </div>
-    </div>
-
-    <div id="compare" class="section">
-      <h2>Free vs Pro</h2>
-      <p>Free builds awareness. Pro gives you depth and control.</p>
-      <div class="compare">
-        <div class="col">
-          <h3>Free — AP Link Audit</h3>
+      <div class="products">
+        <div class="prod-card">
+          <h3>AP Link Audit</h3>
+          <div class="meta">Free plugin • Internal linking audit</div>
           <ul>
-            <li>Scans posts and pages</li>
-            <li>Finds orphan content</li>
-            <li>Finds underlinked content (1–2 inbound links)</li>
-            <li>Shows a small priority list</li>
-            <li>Quick overview for a single site</li>
+            <li>Scans posts and pages for orphan and low-link content.</li>
+            <li>Simple priority list so you know what to fix first.</li>
+            <li>Runs as a manual audit – you stay in control.</li>
           </ul>
-        </div>
-        <div class="col">
-          <h3>Pro — AP Link Audit Pro</h3>
-          <ul>
-            <li><strong>Unlimited priority fix list</strong></li>
-            <li><strong>Unlimited CSV export of all results</strong></li>
-            <li>Advanced category and post-type exclusions</li>
-            <li>More flexible filters for bigger sites</li>
-            <li>Future upgrades to clustering and smart linking tools</li>
-            <li>Priority support from the developer</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div id="pricing" class="section">
-      <h2>Pricing</h2>
-      <p>Simple launch pricing for Pro.</p>
-      <div class="pricing">
-        <div class="price-card">
-          <span class="pill">Launch price</span>
-          <div class="price">$39 <small>one-time</small></div>
-          <ul>
-            <li>AP Link Audit Pro plugin download</li>
-            <li>All current Pro features unlocked</li>
-            <li>Updates for all 1.x releases</li>
-            <li>Use on any sites you manage</li>
-          </ul>
-          <div class="btns" style="margin-top:14px;">
-            <a class="btn btn-primary" href="#" data-buy-pro="1" target="_blank" rel="noopener">
-              Get AP Link Audit Pro
+          <div class="btns">
+            <a class="btn btn-primary" href="https://wordpress.org/plugins/ap-link-audit/" target="_blank" rel="noopener">
+              Get it on WordPress.org
             </a>
-            <a class="btn btn-ghost" href="#faq">Questions?</a>
-          </div>
-          <div class="fine" style="margin-top:10px;">
-            Payments are handled securely by Stripe. You’ll receive the download link and quick-start notes
-            right after checkout.
+            <a class="btn btn-ghost" href="./link-audit/">Learn more</a>
           </div>
         </div>
-        <div class="col">
-          <h3>Who Pro is for</h3>
+
+        <div class="prod-card">
+          <h3>AP Internal Linking Helper</h3>
+          <div class="meta">Upcoming • Editor-side suggestions</div>
           <ul>
-            <li>Site owners who publish regularly and want a clearer internal linking plan.</li>
-            <li>Agencies who need exportable reports for clients.</li>
-            <li>Anyone who likes lightweight tools that do one job well.</li>
+            <li>Shows internal link suggestions directly in the block editor.</li>
+            <li>Designed to make linking part of the writing flow.</li>
+            <li>Pro will add one-click insert, rules, and AI ideas.</li>
           </ul>
+          <div class="btns">
+            <a class="btn btn-ghost" href="./internal-link-helper/">Preview product page</a>
+          </div>
         </div>
       </div>
     </div>
 
-    <div id="faq" class="section">
-      <h2>FAQ</h2>
-
-      <details>
-        <summary>Will the free version stay free?</summary>
-        <p>Yes. AP Link Audit will remain a free, fully-functional internal linking audit plugin.</p>
-      </details>
-
-      <details>
-        <summary>Does the plugin change my theme or front end?</summary>
-        <p>No. It only scans content and shows results in a WordPress admin screen.</p>
-      </details>
-
-      <details>
-        <summary>How do I get Pro after purchase?</summary>
-        <p>
-          After checkout, Stripe will email you a receipt with a download link and short setup guide.
-          Install it like any other plugin and activate it alongside AP Link Audit.
-        </p>
-      </details>
-
-      <details>
-        <summary>Can I use it on multiple sites?</summary>
-        <p>
-          Yes. The code is GPL-friendly — you can use it on as many sites as you manage. We just ask that
-          you keep the ZIP private and point others to the official purchase link.
-        </p>
-      </details>
+    <div id="about" class="section">
+      <h2>About AP Systems Lab</h2>
+      <p>
+        We want AP Systems Lab to stand for good judgement and careful craft. That means choosing
+        problems that are worth solving, resisting feature sprawl, and building tools we’re happy
+        to support for the long term.
+      </p>
+      <p>
+        Every release follows a simple rule: if it doesn’t reduce confusion, remove busywork, or
+        give you more control over your site, it doesn’t ship.
+      </p>
     </div>
 
     <div class="footer">
@@ -521,13 +259,6 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Stripe payment link for all "Buy Pro" buttons
-    const STRIPE_LINK = "https://buy.stripe.com/cNi5kF4XSasH4ef1nldjO0m";
-
-    document.querySelectorAll('a[data-buy-pro="1"]').forEach(a => {
-      a.href = STRIPE_LINK;
-    });
   </script>
 </body>
 </html>
