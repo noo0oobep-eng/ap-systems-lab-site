@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AP Internal Linking Helper — Editor-side Suggestions</title>
+
+  <style>
+    /* Same base styling as other pages */
+    :root{
+      --bg: #0b1020;
+      --panel: rgba(255,255,255,0.04);
+      --panel-2: rgba(255,255,255,0.02);
+      --border: rgba(255,255,255,0.08);
+      --text: #f4f7ff;
+      --muted: rgba(244,247,255,0.68);
+      --radius: 16px;
+      --radius-sm: 12px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:
+        radial-gradient(1200px 700px at 10% -10%, rgba(122,162,255,0.12), transparent 60%),
+        radial-gradient(900px 600px at 90% 10%, rgba(139,255,207,0.10), transparent 55%),
+        var(--bg);
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      line-height:1.45;
+    }
+    .wrap{width:min(1100px,92vw);margin:28px auto 40px;}
+
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:14px;padding:14px 16px;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:var(--panel);
+      backdrop-filter:blur(8px);
+    }
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:0.2px;}
+    .brand-badge{
+      width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;
+      border-radius:9px;
+      background:linear-gradient(135deg,rgba(122,162,255,0.25),rgba(139,255,207,0.22));
+      border:1px solid rgba(255,255,255,0.12);
+      font-size:12px;
+    }
+    .nav-links{display:flex;gap:12px;flex-wrap:wrap;}
+    .nav a{
+      color:var(--muted);
+      text-decoration:none;
+      font-size:12.8px;
+      font-weight:600;
+      padding:6px 8px;
+      border-radius:8px;
+    }
+    .nav a:hover{color:var(--text);background:rgba(255,255,255,0.05)}
+
+    .hero{
+      margin-top:18px;
+      display:grid;gap:18px;
+      grid-template-columns:1.1fr 0.9fr;
+      align-items:start;
+    }
+    @media (max-width:900px){.hero{grid-template-columns:1fr}}
+
+    .card{
+      background:linear-gradient(180deg,rgba(255,255,255,0.03),transparent),var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow:var(--shadow);
+    }
+    .pill{
+      display:inline-flex;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:11.5px;
+      font-weight:700;
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,0.10);
+      background:rgba(255,255,255,0.03);
+      letter-spacing:0.25px;
+    }
+    h1{
+      margin:10px 0 10px;
+      font-size:clamp(28px,3.5vw,38px);
+      line-height:1.12;
+    }
+    .sub{color:var(--muted);font-size:15px;margin:0 0 16px;}
+
+    .points{display:grid;gap:10px;margin-top:14px;}
+    .point{
+      display:flex;gap:10px;align-items:flex-start;
+      padding:10px 10px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:rgba(255,255,255,0.02);
+    }
+    .dot{
+      width:10px;height:10px;margin-top:6px;
+      border-radius:50%;
+      background:linear-gradient(135deg,rgba(122,162,255,0.9),rgba(139,255,207,0.9));
+      box-shadow:0 0 0 3px rgba(255,255,255,0.03);
+      flex:0 0 auto;
+    }
+
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:12px 16px;
+      border-radius:12px;
+      font-weight:600;font-size:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.03);
+      color:var(--text);
+      text-decoration:none;
+    }
+    .btn-primary{
+      background:linear-gradient(135deg,rgba(122,162,255,0.18),rgba(139,255,207,0.14));
+      border-color:rgba(255,255,255,0.14);
+    }
+    .btn-ghost{color:var(--muted)}
+
+    .preview{
+      background:linear-gradient(180deg,rgba(255,255,255,0.03),transparent),var(--panel-2);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:var(--shadow);
+      min-height:280px;
+      display:grid;gap:14px;align-content:start;
+    }
+    .preview-box{
+      border:1px dashed rgba(255,255,255,0.18);
+      border-radius:12px;
+      padding:14px;
+      color:var(--muted);
+      font-size:13px;
+      background:rgba(255,255,255,0.02);
+    }
+
+    .section{
+      margin-top:46px;
+      background:rgba(255,255,255,0.02);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:28px;
+    }
+    .section h2{margin:0 0 8px;font-size:clamp(20px,2.4vw,26px);}
+    .section p{color:var(--muted);margin:0 0 14px}
+
+    .grid-3{
+      display:grid;gap:12px;
+      grid-template-columns:repeat(3,1fr);
+    }
+    @media (max-width:900px){.grid-3{grid-template-columns:1fr}}
+    .feat{
+      padding:16px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid var(--border);
+      border-radius:var(--radius-sm);
+    }
+    .feat h3{margin:0 0 6px;font-size:16px}
+    .feat p{margin:0;font-size:13.5px}
+
+    .footer{
+      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+      color:var(--muted);
+      font-size:12.5px;
+      margin-top:46px;
+      padding-top:14px;
+      border-top:1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="nav">
+      <div class="brand">
+        <span class="brand-badge">AP</span>
+        <span>AP Systems Lab</span>
+      </div>
+      <div class="nav-links">
+        <a href="../">Home</a>
+        <a href="#product">Product</a>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div class="card">
+        <span class="pill">WordPress • Editor-first • Internal links</span>
+        <h1>Internal linking that happens while you write.</h1>
+        <p class="sub">
+          AP Internal Linking Helper adds a focused sidebar to the block editor with fast internal
+          link suggestions. No setup, no bloat – it sits next to your content while you draft.
+        </p>
+
+        <div class="points">
+          <div class="point">
+            <span class="dot"></span>
+            <div><strong>Stop hunting old posts.</strong> Suggestions appear directly in the editor.</div>
+          </div>
+          <div class="point">
+            <span class="dot"></span>
+            <div><strong>Better SEO habits.</strong> Internal linking becomes a normal step in publishing.</div>
+          </div>
+          <div class="point">
+            <span class="dot"></span>
+            <div><strong>Low weight.</strong> Editor-only and performance-friendly.</div>
+          </div>
+        </div>
+
+        <div class="btns">
+          <a class="btn btn-ghost" href="mailto:apsystemslab@gmail.com?subject=AP%20Internal%20Linking%20Helper%20updates">
+            Join early-access list
+          </a>
+        </div>
+        <div class="fine" style="margin-top:10px;color:var(--muted);font-size:12.5px;">
+          Pro features (one-click insert, rules, AI ideas) are in development. Early-access testers
+          will get updates and a launch discount.
+        </div>
+      </div>
+
+      <div class="preview">
+        <strong>How the helper looks in the editor</strong>
+
+        <div class="preview-box">
+          <img src="../assets/img/Pro1 (1).png" alt="AP Internal Linking Helper sidebar" style="width:100%;border-radius:10px;">
+        </div>
+
+        <div class="preview-box">
+          <img src="../assets/img/Pro1 (2).png" alt="Internal linking suggestions list" style="width:100%;border-radius:10px;">
+        </div>
+
+        <div class="preview-box">
+          <img src="../assets/img/Pro1 (3).png" alt="AP Internal Linking Helper settings" style="width:100%;border-radius:10px;">
+        </div>
+      </div>
+    </div>
+
+    <div id="product" class="section">
+      <h2>What it’s for</h2>
+      <p>A small tool for writers, solo site owners, and content teams who publish regularly.</p>
+
+      <div class="grid-3">
+        <div class="feat">
+          <h3>Fast suggestions</h3>
+          <p>Shows likely internal links based on the content you’re editing right now.</p>
+        </div>
+        <div class="feat">
+          <h3>Cleaner workflow</h3>
+          <p>Reduces tab-switching, searching, and manual copy-paste.</p>
+        </div>
+        <div class="feat">
+          <h3>Pro planning</h3>
+          <p>Pro will add rules, exclusions, and optional AI ideas for anchors and targets.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div>© <span id="year"></span> AP Systems Lab</div>
+      <div>Lightweight WordPress tools for business workflows.</div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
